@@ -100,6 +100,11 @@ All into **one unified platform**.
 ```bash
 git clone https://github.com/Kumaran2048/RepoInsight.git
 
-🌐 Live Website
-🔗 Frontend (Vercel):
-https://repo-insight-f7tnqmkkq-kumaran2048s-projects.vercel.app/
+## 🌐 Live Website
+
+<p align="center">
+  <a href="https://repo-insight-f7tnqmkkq-kumaran2048s-projects.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel" alt="Live Demo"/>
+  </a>
+</p>
+
