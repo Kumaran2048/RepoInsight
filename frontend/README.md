@@ -181,18 +181,6 @@ import Dashboard from "../pages/Dashboard";
 import Report from "../pages/Report";
 import NotFound from "../pages/NotFound";
 
-export default function AppRoutes() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/report" element={<Report />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
 
 ⚙️ Environment Variables
 Frontend (frontend/.env)
