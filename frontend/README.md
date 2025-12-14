@@ -1,18 +1,45 @@
-# React + Vite
+# REPOINSIGHT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Transforming Code Quality Into Competitive Edge
 
-Currently, two official plugins are available:
+*Built with the tools and technologies:*
+- **Express** | **React** | **MongoDB** | **Mongoose**
+- **Vite** | **Socket.io** | **OpenAI API** | **Axios**
+- **Chart.js** | **date-fns** | **Cheerio** | **PostCSS**
+- **ESLint** | **npm** | **JavaScript** | **Markdown**
+- **JSON** | **.ENV** | **SemVer** | **Fresh**
+- **Autoprefixer** | **Notemon**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Overview
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Repolnsight is a powerful developer tool designed to analyze, visualize, and improve your code repositories through AI-driven insights and comprehensive reports. It streamlines repository health checks, project assessments, and collaboration metrics into a unified platform.
 
-Note: This will impact Vite dev & build performances.
+### Why Repolnsight?
 
-## Expanding the ESLint configuration
+This project aims to enhance code quality and team productivity by providing automated analysis, actionable recommendations, and detailed visualizations. The core features include:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **AI Insights & Recommendations:** Leverages AI to evaluate code quality, suggest improvements, and generate tailored roadmaps.
+- **Interactive Dashboards:** Offers visual metrics, badges, and activity summaries to track progress and identify areas for growth.
+- **GitHub Integration:** Seamlessly fetches repository data, validates URLs, and monitors project health directly from GitHub.
+- **Report Export & Sharing:** Enables exporting detailed analysis reports in PDF, JSON, or sharing via links and email.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+This project requires the following dependencies:
+
+- **Programming Language**: JavaScript  
+- **Package Manager**: Npm  
+
+### Installation
+
+Build Repolnsight from the source and install dependencies:
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/Kumaran2048/Repolnsight
