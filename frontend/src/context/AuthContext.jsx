@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import api from '../services/api'; // Correct relative path to services folder
+import api from '../services/api';
 
 const AuthContext = createContext();
 
@@ -20,18 +20,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkAuth = async () => {
     try {
       const token = localStorage.getItem('token');
       if (token) {
-        // Your axios interceptor will automatically add the token
         const response = await api.get('/user/me');
         setUser(response.data.data);
       }
     } catch (error) {
-      // Clear invalid token
       if (error.response?.status === 401) {
         localStorage.removeItem('token');
       }
@@ -44,17 +43,14 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/login', { email, password });
       const { token, user } = response.data.data;
-      
       localStorage.setItem('token', token);
       setUser(user);
-      
       toast.success('Login successful!');
       navigate('/dashboard');
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Login failed';
-      toast.error(errorMessage);
-      return { success: false, error: errorMessage };
+      toast.error(error.response?.data?.message || 'Login failed');
+      return { success: false };
     }
   };
 
@@ -62,17 +58,14 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/register', userData);
       const { token, user } = response.data.data;
-      
       localStorage.setItem('token', token);
       setUser(user);
-      
       toast.success('Registration successful!');
       navigate('/dashboard');
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Registration failed';
-      toast.error(errorMessage);
-      return { success: false, error: errorMessage };
+      toast.error(error.response?.data?.message || 'Registration failed');
+      return { success: false };
     }
   };
 
@@ -90,9 +83,8 @@ export const AuthProvider = ({ children }) => {
       toast.success('Profile updated successfully');
       return { success: true };
     } catch (error) {
-      const errorMessage = error.response?.data?.message || 'Update failed';
-      toast.error(errorMessage);
-      return { success: false, error: error.response?.data?.message };
+      toast.error(error.response?.data?.message || 'Update failed');
+      return { success: false };
     }
   };
 
@@ -106,9 +98,12 @@ export const AuthProvider = ({ children }) => {
     checkAuth
   };
 
+  // ✅ Fix: wrap JSX in parentheses and return properly
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? null : children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthContext;
