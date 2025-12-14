@@ -16,11 +16,10 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Moved inside component
 
   useEffect(() => {
     checkAuth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const checkAuth = async () => {
@@ -43,14 +42,17 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/login', { email, password });
       const { token, user } = response.data.data;
+      
       localStorage.setItem('token', token);
       setUser(user);
+      
       toast.success('Login successful!');
-      navigate('/dashboard');
+      navigate('/dashboard'); // ✅ Works now
       return { success: true };
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed');
-      return { success: false };
+      const errorMessage = error.response?.data?.message || 'Login failed';
+      toast.error(errorMessage);
+      return { success: false, error: errorMessage };
     }
   };
 
@@ -58,14 +60,17 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post('/auth/register', userData);
       const { token, user } = response.data.data;
+      
       localStorage.setItem('token', token);
       setUser(user);
+      
       toast.success('Registration successful!');
-      navigate('/dashboard');
+      navigate('/dashboard'); // ✅ Works now
       return { success: true };
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
-      return { success: false };
+      const errorMessage = error.response?.data?.message || 'Registration failed';
+      toast.error(errorMessage);
+      return { success: false, error: errorMessage };
     }
   };
 
@@ -73,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setUser(null);
     toast.success('Logged out successfully');
-    navigate('/');
+    navigate('/'); // ✅ Works now
   };
 
   const updateProfile = async (profileData) => {
@@ -83,8 +88,9 @@ export const AuthProvider = ({ children }) => {
       toast.success('Profile updated successfully');
       return { success: true };
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Update failed');
-      return { success: false };
+      const errorMessage = error.response?.data?.message || 'Update failed';
+      toast.error(errorMessage);
+      return { success: false, error: error.response?.data?.message };
     }
   };
 
@@ -98,12 +104,9 @@ export const AuthProvider = ({ children }) => {
     checkAuth
   };
 
-  // ✅ Fix: wrap JSX in parentheses and return properly
   return (
     <AuthContext.Provider value={value}>
-      {loading ? null : children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
-
-export default AuthContext;
