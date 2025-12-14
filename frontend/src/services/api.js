@@ -1,50 +1,20 @@
-import axios from 'axios'
+import axios from "axios";
 
 // Create axios instance
 const api = axios.create({
-  baseURL: 'https://repoinsight.onrender.com',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
-})
+});
 
-// Add auth token to requests
+// Add auth token
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem("token");
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  return config
-})
+  return config;
+});
 
-// Analysis API
-export const analysisAPI = {
-  analyzeRepository: (repoUrl) => 
-    api.post('/analyze', { repositoryUrl: repoUrl }),
-  
-  getAnalyses: () => 
-    api.get('/analyses'),
-  
-  getAnalysis: (id) => 
-    api.get(`/analyses/${id}`),
-  
-  compareRepositories: (repo1, repo2) => 
-    api.post('/compare', { repo1, repo2 }),
-  
-  exportPDF: (id) => 
-    api.get(`/export/pdf/${id}`, { responseType: 'blob' }),
-}
-
-// User API
-export const userAPI = {
-  getProfile: () => 
-    api.get('/user/profile'),
-  
-  updateProfile: (profileData) => 
-    api.put('/user/profile', profileData),
-  
-  getDashboard: () => 
-    api.get('/dashboard'),
-}
-
-export default api
+export default api;
