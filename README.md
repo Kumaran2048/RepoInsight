@@ -40,8 +40,8 @@
 
 <p align="center">
   <a href="https://repoinsight.netlify.app"target="_blank">
-    <img src="https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel" alt="Live Demo"/>
-  </a>
+    <img src="https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=Netlify" alt="Live Demo"/>
+  </a>ify
 </p>
 ---
 
