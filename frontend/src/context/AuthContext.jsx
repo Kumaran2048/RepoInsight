@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import api from '../services/api';
 
@@ -16,7 +15,6 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // ✅ Moved inside component
 
   useEffect(() => {
     checkAuth();
@@ -47,8 +45,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       
       toast.success('Login successful!');
-      navigate('/dashboard'); // ✅ Works now
-      return { success: true };
+      return { success: true, redirect: '/dashboard' };
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Login failed';
       toast.error(errorMessage);
@@ -65,8 +62,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       
       toast.success('Registration successful!');
-      navigate('/dashboard'); // ✅ Works now
-      return { success: true };
+      return { success: true, redirect: '/dashboard' };
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Registration failed';
       toast.error(errorMessage);
@@ -78,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setUser(null);
     toast.success('Logged out successfully');
-    navigate('/'); // ✅ Works now
+    return { redirect: '/' };
   };
 
   const updateProfile = async (profileData) => {
