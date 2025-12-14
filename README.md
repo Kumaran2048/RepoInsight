@@ -8,6 +8,8 @@
   <img src="https://img.shields.io/github/last-commit/Kumaran2048/RepoInsight?style=for-the-badge" />
   <img src="https://img.shields.io/github/languages/top/Kumaran2048/RepoInsight?style=for-the-badge" />
   <img src="https://img.shields.io/github/languages/count/Kumaran2048/RepoInsight?style=for-the-badge" />
+  <img src="https://img.shields.io/github/issues/Kumaran2048/RepoInsight?style=for-the-badge" />
+  <img src="https://img.shields.io/github/forks/Kumaran2048/RepoInsight?style=for-the-badge" />
 </p>
 
 ---
@@ -38,11 +40,15 @@
 
 ## 📑 Table of Contents
 - [Overview](#overview)
+- [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
 - [Live Website](#live-website)
+- [Screenshots](#screenshots)
+- [Author](#author)
+- [License](#license)
 
 ---
 
@@ -66,6 +72,19 @@ All into **one unified platform**.
 
 ---
 
+## ✨ Features
+
+- ✅ AI-powered code quality analysis  
+- ✅ GitHub repository health scoring  
+- ✅ Interactive charts for commits, pull requests, and contributors  
+- ✅ Export reports as PDF / JSON  
+- ✅ Real-time collaboration metrics  
+- ✅ Search and filter repositories  
+- ✅ Responsive design with React + Tailwind CSS  
+- ✅ Secure backend with Node.js, Express.js, MongoDB  
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -79,35 +98,8 @@ All into **one unified platform**.
 
 1️⃣ **Clone the repository**
 ```bash
-git clone https://github.com/Kumaran2048/RepoInsight
+git clone https://github.com/Kumaran2048/RepoInsight.git
 
-git clone https://github.com/Kumaran2048/RepoInsight
-2️⃣ Navigate to the project directory
-
-bash
-Copy code
-cd RepoInsight
-3️⃣ Install dependencies
-
-bash
-Copy code
-npm install
-▶️ Usage
-Run the application using:
-
-bash
-Copy code
-npm start
-For development:
-
-bash
-Copy code
-npm run dev
 🌐 Live Website
-🔗 Frontend (Vercel)
+🔗 Frontend (Vercel):
 https://repo-insight-f7tnqmkkq-kumaran2048s-projects.vercel.app/
-
-🧑‍💻 Author
-Kumaran Suresh
-Full Stack Developer | MERN | AI Enthusiast
-
