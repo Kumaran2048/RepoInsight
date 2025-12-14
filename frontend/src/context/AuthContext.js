@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import api from '../services/api'; // Correct relative path to services folder
 
 const AuthContext = createContext();
 
@@ -18,8 +18,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-
   useEffect(() => {
     checkAuth();
   }, []);
@@ -28,13 +26,15 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem('token');
       if (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const response = await axios.get(`${API_URL}/user/me`);
+        // Your axios interceptor will automatically add the token
+        const response = await api.get('/user/me');
         setUser(response.data.data);
       }
     } catch (error) {
-      localStorage.removeItem('token');
-      delete axios.defaults.headers.common['Authorization'];
+      // Clear invalid token
+      if (error.response?.status === 401) {
+        localStorage.removeItem('token');
+      }
     } finally {
       setLoading(false);
     }
@@ -42,43 +42,42 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, { email, password });
+      const response = await api.post('/auth/login', { email, password });
       const { token, user } = response.data.data;
       
       localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(user);
       
       toast.success('Login successful!');
       navigate('/dashboard');
       return { success: true };
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed');
-      return { success: false, error: error.response?.data?.message };
+      const errorMessage = error.response?.data?.message || 'Login failed';
+      toast.error(errorMessage);
+      return { success: false, error: errorMessage };
     }
   };
 
   const register = async (userData) => {
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
+      const response = await api.post('/auth/register', userData);
       const { token, user } = response.data.data;
       
       localStorage.setItem('token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(user);
       
       toast.success('Registration successful!');
       navigate('/dashboard');
       return { success: true };
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
-      return { success: false, error: error.response?.data?.message };
+      const errorMessage = error.response?.data?.message || 'Registration failed';
+      toast.error(errorMessage);
+      return { success: false, error: errorMessage };
     }
   };
 
   const logout = () => {
     localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
     setUser(null);
     toast.success('Logged out successfully');
     navigate('/');
@@ -86,12 +85,13 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (profileData) => {
     try {
-      const response = await axios.put(`${API_URL}/user/profile`, profileData);
+      const response = await api.put('/user/profile', profileData);
       setUser(response.data.data);
       toast.success('Profile updated successfully');
       return { success: true };
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Update failed');
+      const errorMessage = error.response?.data?.message || 'Update failed';
+      toast.error(errorMessage);
       return { success: false, error: error.response?.data?.message };
     }
   };
