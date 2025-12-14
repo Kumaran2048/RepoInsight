@@ -39,9 +39,9 @@
 ## 🌐 Live Website
 
 <p align="center">
-  <a href="https://repoinsight.netlify.app"target="_blank">
-    <img src="https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=Netlify" alt="Live Demo"/>
-  </a>ify
+  <a href="https://your-site-name.netlify.app" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Netlify-blue?style=for-the-badge&logo=Netlify" alt="Live Demo"/>
+  </a>
 </p>
 ---
 
